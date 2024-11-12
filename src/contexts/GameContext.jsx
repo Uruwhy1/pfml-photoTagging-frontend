@@ -4,11 +4,18 @@ import PropTypes from "prop-types";
 const GameContext = createContext();
 
 export const GameProvider = ({ children }) => {
+  // prettier-ignore
   const [characters] = useState([
-    { name: "Sleeping Dragon", img: "/sleepingDragon.png" },
-    { name: "Red Dragon", img: "/redDragon.png" },
-    { name: "Yellow Fish", img: "/yellowFish.png" },
+  { id: 1, name: "Sleeping Dragon", img: "/sleepingDragon.png", size: "medium" },
+  { id: 2, name: "Red Dragon", img: "/redDragon.png", size: "medium" },
+  { id: 3, name: "Yellow Fish", img: "/yellowFish.png", size: "very small" },
+  { id: 4, name: "Ship Guy", img: "/shipGuy.png", size: "very small" },
+  { id: 5, name: "Teacher", img: "/teacher.png", size: "very small" },
+  { id: 6, name: "Cats", img: "/cats.png", size: "very small" },
+  { id: 7, name: "Dragon and Human", img: "/dragonAndHuman.png", size: "small" },
+  { id: 8, name: "Stupid Face", img: "/stupidFace.png", size: "big" },
   ]);
+
   const [selectedCharacters, setSelectedCharacters] = useState([]);
 
   const [isGameStarted, setIsGameStarted] = useState(false);
