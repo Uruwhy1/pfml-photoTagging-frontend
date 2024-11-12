@@ -1,10 +1,10 @@
-import { useState } from "react";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 import "./App.css";
 
 import Start from "./views/Start";
 import Playing from "./views/Playing";
 import Leaderboard from "./views/Leaderboard";
+import { useState } from "react";
 
 function App() {
   const [view, setView] = useState("start");
