@@ -3,7 +3,7 @@ import GameContext from "../contexts/GameContext";
 import PropTypes from "prop-types";
 
 const Playing = ({ setView }) => {
-  const { selectedCharacters } = useContext(GameContext);
+  const { selectedCharacters, gameTimer } = useContext(GameContext);
 
   return (
     <div>
@@ -13,6 +13,7 @@ const Playing = ({ setView }) => {
           <p>{character.name}</p>
         </div>
       ))}{" "}
+      <p>Timer: {gameTimer} seconds</p>
       <button onClick={() => setView("board")}>View Leaderboard</button>
     </div>
   );
