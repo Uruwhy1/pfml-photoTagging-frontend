@@ -1,6 +1,8 @@
 import { useContext, useEffect } from "react";
 import GameContext from "../contexts/GameContext";
 import PropTypes from "prop-types";
+import styles from "./Start.module.css";
+import Character from "../components/Character";
 
 const Start = ({ setView }) => {
   const { startGame, chooseCharacters, selectedCharacters } =
@@ -10,24 +12,36 @@ const Start = ({ setView }) => {
   useEffect(chooseCharacters, []);
 
   return (
-    <div>
-      <h2>Select these characters:</h2>
-      <div style={{ display: "flex", gap: "10px" }}>
-        {selectedCharacters.map((character) => (
-          <div key={character.name}>
-            <img src={character.img} alt={character.name} width="100" />
-            <p>{character.name}</p>
+    <div className={styles.container}>
+      <div className={styles.menu}>
+        <div className={styles.left}>
+          <img src="/island.jpg" alt="Island" />
+        </div>
+        <div className={styles.right}>
+          <div>
+            <h3>Welcome to the Game!</h3>
+            <p>
+              You will be presented with a bustling island filled with
+              characters. Your goal is to find the three randomly selected
+              characters as quickly as possible.
+            </p>
           </div>
-        ))}
+          <div className={styles.characters}>
+            {selectedCharacters.map((character) => (
+              <Character key={character.id} character={character} />
+            ))}
+          </div>
+          <button
+            className={styles.start}
+            onClick={() => {
+              startGame();
+              setView("playing");
+            }}
+          >
+            START GAME
+          </button>
+        </div>
       </div>
-      <button
-        onClick={() => {
-          startGame();
-          setView("playing");
-        }}
-      >
-        START GAME
-      </button>
     </div>
   );
 };
