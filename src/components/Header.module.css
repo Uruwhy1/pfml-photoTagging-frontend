@@ -44,6 +44,16 @@
 
 @media screen and (max-width: 1000px) {
   .characters {
+    max-height: 140px;
+
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: var(--items-background);
+
+    img {
+      height: calc(100px - 1rem);
+      width: calc(100px - 1rem);
+    }
     > div {
       min-width: 0;
       padding: 0;

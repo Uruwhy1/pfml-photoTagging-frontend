@@ -1,0 +1,55 @@
+.contextMenu {
+  position: absolute;
+  z-index: 10;
+
+  background-color: var(--header-bg);
+  color: #fff;
+
+  border-radius: 5px;
+  overflow: hidden;
+
+  height: 0;
+  animation: enormify 0.3s 1 forwards ease-out;
+
+  --image-size: 70px;
+  --character-padding: 0.5rem;
+}
+
+.contextMenu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.contextMenu ul > div {
+  cursor: pointer;
+  padding: var(--character-padding);
+
+  transition: background-color 0.15s;
+
+  > img {
+    height: var(--image-size);
+    width: var(--image-size);
+  }
+
+  > div p:nth-child(2) {
+    display: none;
+  }
+
+  &:hover {
+    background-color: #454545;
+  }
+}
+
+@keyframes enormify {
+  from {
+    height: 0;
+  }
+  to {
+    /* it works :) */
+    height: calc((var(--image-size) + (var(--character-padding) * 2)) * 3);
+  }
+}
