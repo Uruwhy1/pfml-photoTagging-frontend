@@ -12,7 +12,7 @@ function App() {
   const [view, setView] = useState("start");
 
   return (
-    <div className="app-container">
+    <>
       <Playing setView={setView} />
 
       <SwitchTransition>
@@ -23,7 +23,7 @@ function App() {
           </>
         </CSSTransition>
       </SwitchTransition>
-    </div>
+    </>
   );
 }
 

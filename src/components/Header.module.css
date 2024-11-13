@@ -1,6 +1,11 @@
 .container {
+  position: fixed;
+  width: 100%;
+
+  max-height: var(--header-height);
+
   padding: 0.75rem;
-  background-color: #303030;
+  background-color: transparent;
 
   color: #fff;
 
@@ -8,6 +13,8 @@
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+
+  --items-background: rgba(0, 0, 0, 0.772);
 }
 
 .characters {
@@ -15,13 +22,24 @@
   gap: 1rem;
 
   > div {
-    background-color: rgba(255, 255, 255, 0.141);
+    background-color: var(--items-background);
 
     min-width: 250px;
 
     padding: 0.5rem;
     border-radius: 5px;
   }
+}
+
+.timer {
+  font-weight: 1000;
+  font-size: 2rem;
+
+  margin-right: 2rem;
+
+  border-radius: 5px;
+  padding: 1rem;
+  background-color: var(--items-background);
 }
 
 @media screen and (max-width: 1000px) {

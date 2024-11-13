@@ -15,7 +15,7 @@ const Start = ({ setView }) => {
     <div className={styles.container}>
       <div className={styles.menu}>
         <div className={styles.left}>
-          <img src="/island.jpg" alt="Island" />
+          <img src="/island.png" alt="Island" />
         </div>
         <div className={styles.right}>
           <div>

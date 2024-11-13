@@ -1,0 +1,14 @@
+.container {
+  background-color: var(--header-bg);
+
+  display: flex;
+  justify-content: center;
+}
+
+.image {
+  margin-top: var(--header-height);
+
+  max-width: 3000px;
+  width: 100%;
+  overflow: scroll;
+}

@@ -1,5 +1,7 @@
 :root {
   --background-cover: #000000bc;
+  --header-bg: #303030;
+  --header-height: 140px;
 
   --menu-bg: rgb(40, 40, 40);
   --menu-color: #fff;

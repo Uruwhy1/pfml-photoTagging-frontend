@@ -2,6 +2,7 @@ import { useContext } from "react";
 import GameContext from "../contexts/GameContext";
 import PropTypes from "prop-types";
 import Header from "../components/Header";
+import styles from "./Playing.module.css";
 
 const Playing = ({ setView }) => {
   const { selectedCharacters, gameTimer } = useContext(GameContext);
@@ -9,7 +10,9 @@ const Playing = ({ setView }) => {
   return (
     <>
       <Header selectedCharacters={selectedCharacters} gameTimer={gameTimer} />
-      <button onClick={() => setView("board")}>View Leaderboard</button>
+      <main className={styles.container}>
+        <img className={styles.image} src="/island.png" alt="" />
+      </main>
     </>
   );
 };

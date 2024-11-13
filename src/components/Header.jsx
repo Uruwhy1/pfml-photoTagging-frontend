@@ -10,7 +10,7 @@ const Header = ({ selectedCharacters, gameTimer }) => {
           <Character key={character.id} character={character} />
         ))}{" "}
       </div>
-      <p>Timer: {gameTimer} seconds</p>
+      <p className={styles.timer}>{gameTimer}s</p>
     </header>
   );
 };
