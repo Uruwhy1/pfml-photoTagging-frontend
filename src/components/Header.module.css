@@ -1,0 +1,39 @@
+.container {
+  padding: 0.75rem;
+  background-color: #303030;
+
+  color: #fff;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.characters {
+  display: flex;
+  gap: 1rem;
+
+  > div {
+    background-color: rgba(255, 255, 255, 0.141);
+
+    min-width: 250px;
+
+    padding: 0.5rem;
+    border-radius: 5px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .characters {
+    > div {
+      min-width: 0;
+      padding: 0;
+      background-color: transparent;
+
+      > div {
+        display: none;
+      }
+    }
+  }
+}

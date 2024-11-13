@@ -18,7 +18,10 @@ const Character = ({ character }) => {
   };
 
   return (
-    <div className={styles.container} key={character.name}>
+    <div
+      className={`${styles.container} ${character.found && styles.found}`}
+      key={character.name}
+    >
       <img src={character.img} alt={character.name} width="100" />
       <div>
         <p>{character.name}</p>
@@ -35,6 +38,7 @@ Character.propTypes = {
     size: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    found: PropTypes.bool.isRequired,
   }).isRequired,
 };
 

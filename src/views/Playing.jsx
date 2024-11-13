@@ -1,21 +1,16 @@
 import { useContext } from "react";
 import GameContext from "../contexts/GameContext";
 import PropTypes from "prop-types";
+import Header from "../components/Header";
 
 const Playing = ({ setView }) => {
   const { selectedCharacters, gameTimer } = useContext(GameContext);
 
   return (
-    <div>
-      {selectedCharacters.map((character) => (
-        <div key={character.name}>
-          <img src={character.img} alt={character.name} width="100" />
-          <p>{character.name}</p>
-        </div>
-      ))}{" "}
-      <p>Timer: {gameTimer} seconds</p>
+    <>
+      <Header selectedCharacters={selectedCharacters} gameTimer={gameTimer} />
       <button onClick={() => setView("board")}>View Leaderboard</button>
-    </div>
+    </>
   );
 };
 

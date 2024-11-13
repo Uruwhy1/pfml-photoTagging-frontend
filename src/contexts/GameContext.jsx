@@ -23,7 +23,13 @@ export const GameProvider = ({ children }) => {
 
   const chooseCharacters = () => {
     const shuffled = [...characters].sort(() => 0.5 - Math.random());
-    setSelectedCharacters(shuffled.slice(0, 3));
+
+    const selectedWithFound = shuffled.slice(0, 3).map((character) => ({
+      ...character,
+      found: false,
+    }));
+
+    setSelectedCharacters(selectedWithFound);
   };
 
   const startGame = () => {
