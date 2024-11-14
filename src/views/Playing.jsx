@@ -16,6 +16,7 @@ const Playing = ({ setView }) => {
     const image = e.target.getBoundingClientRect();
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
+
     const menuWidth = 300;
     const menuHeight = 258;
 
@@ -25,15 +26,13 @@ const Playing = ({ setView }) => {
     if (menuVisible) {
       setMenuVisible(false);
     } else {
-      let adjustedX = CORD_X + 5;
-      let adjustedY = CORD_Y + 145;
+      const adjustedX =
+        e.clientX > viewportWidth / 2 ? CORD_X - menuWidth - 5 : CORD_X + 5;
 
-      if (adjustedX + menuWidth > viewportWidth) {
-        adjustedX = viewportWidth - menuWidth - 5;
-      }
-      if (adjustedY + menuHeight > viewportHeight) {
-        adjustedY = adjustedY - menuHeight - 5;
-      }
+      const adjustedY =
+        e.clientY > viewportHeight / 2
+          ? CORD_Y - menuHeight / 2
+          : CORD_Y + menuHeight / 2 + 10; // not sure why I need to add offset here
 
       setMenuVisible(true);
       setMenuPosition({ x: adjustedX, y: adjustedY });
@@ -46,6 +45,7 @@ const Playing = ({ setView }) => {
     const newX = x / image.width;
     const newY = y / image.height;
 
+    console.log(newX, newY);
     setNormalizedCoords({ x: newX, y: newY });
   }
 

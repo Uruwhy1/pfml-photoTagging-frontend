@@ -20,6 +20,7 @@ export const GameProvider = ({ children }) => {
 
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [gameTimer, setGameTimer] = useState(0);
+  const [username, setUsername] = useState("");
 
   const chooseCharacters = () => {
     const shuffled = [...characters].sort(() => 0.5 - Math.random());
@@ -35,6 +36,7 @@ export const GameProvider = ({ children }) => {
   const startGame = () => {
     setIsGameStarted(true);
     setGameTimer(0);
+    alert(`game started with username: ${username}`);
   };
 
   useEffect(() => {
@@ -54,6 +56,8 @@ export const GameProvider = ({ children }) => {
         startGame,
         gameTimer,
         chooseCharacters,
+        username,
+        setUsername,
       }}
     >
       {children}

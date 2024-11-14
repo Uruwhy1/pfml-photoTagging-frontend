@@ -1,7 +1,7 @@
 import styles from "./Character.module.css";
 import PropTypes from "prop-types";
 
-const Character = ({ character }) => {
+const Character = ({ character, handleClick }) => {
   // Determine the difficulty level based on the size property
   const getDifficultyClass = (size) => {
     switch (size) {
@@ -21,6 +21,7 @@ const Character = ({ character }) => {
     <div
       className={`${styles.container} ${character.found && styles.found}`}
       key={character.name}
+      onClick={() => handleClick(character)}
     >
       <img src={character.img} alt={character.name} width="100" />
       <div>
@@ -40,6 +41,7 @@ Character.propTypes = {
     name: PropTypes.string.isRequired,
     found: PropTypes.bool.isRequired,
   }).isRequired,
+  handleClick: PropTypes.func,
 };
 
 export default Character;

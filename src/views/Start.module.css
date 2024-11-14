@@ -44,6 +44,11 @@
   gap: 1rem;
 }
 
+.usernameInput {
+  display: flex;
+  flex-direction: column;
+}
+
 .characters {
   display: flex;
   flex-direction: column;
