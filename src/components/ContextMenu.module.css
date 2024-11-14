@@ -9,6 +9,7 @@
   overflow: hidden;
 
   height: 0;
+  width: 300px;
   animation: enormify 0.3s 1 forwards ease-out;
 
   --image-size: 70px;

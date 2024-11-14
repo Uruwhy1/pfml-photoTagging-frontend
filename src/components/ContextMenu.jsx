@@ -26,7 +26,6 @@ ContextMenu.propTypes = {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
   }).isRequired,
-  visible: PropTypes.bool.isRequired,
   onSelect: PropTypes.func.isRequired,
 };
 

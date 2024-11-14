@@ -8,6 +8,7 @@
   background-color: transparent;
 
   color: #fff;
+  pointer-events: none;
 
   display: flex;
   justify-content: space-between;
@@ -28,6 +29,9 @@
 
     padding: 0.5rem;
     border-radius: 5px;
+
+    pointer-events: all;
+    user-select: none;
   }
 }
 
@@ -40,6 +44,9 @@
   border-radius: 5px;
   padding: 1rem;
   background-color: var(--items-background);
+
+  pointer-events: all;
+  user-select: none;
 }
 
 @media screen and (max-width: 1000px) {

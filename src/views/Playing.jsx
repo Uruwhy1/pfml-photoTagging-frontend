@@ -14,15 +14,29 @@ const Playing = ({ setView }) => {
 
   const handleImageClick = (e) => {
     const image = e.target.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const menuWidth = 300;
+    const menuHeight = 258;
 
     const CORD_X = e.clientX - image.x;
     const CORD_Y = e.clientY - image.y;
 
-    console.log(CORD_X);
-    if (menuVisible) setMenuVisible(false);
-    else {
+    if (menuVisible) {
+      setMenuVisible(false);
+    } else {
+      let adjustedX = CORD_X + 5;
+      let adjustedY = CORD_Y + 145;
+
+      if (adjustedX + menuWidth > viewportWidth) {
+        adjustedX = viewportWidth - menuWidth - 5;
+      }
+      if (adjustedY + menuHeight > viewportHeight) {
+        adjustedY = adjustedY - menuHeight - 5;
+      }
+
       setMenuVisible(true);
-      setMenuPosition({ x: CORD_X + 5, y: CORD_Y + 145 });
+      setMenuPosition({ x: adjustedX, y: adjustedY });
 
       normalizeCoords(image, CORD_X, CORD_Y);
     }
