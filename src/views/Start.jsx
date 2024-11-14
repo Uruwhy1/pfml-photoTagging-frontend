@@ -1,10 +1,15 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import GameContext from "../contexts/GameContext";
 import PropTypes from "prop-types";
 import styles from "./Start.module.css";
 import Character from "../components/Character";
 
 const Start = ({ setView }) => {
+  const [userError, setUserError] = useState(
+    "Empty usernames will be randomized."
+  );
+  const userInputRef = useRef("");
+
   const {
     username,
     setUsername,
@@ -17,7 +22,17 @@ const Start = ({ setView }) => {
   useEffect(chooseCharacters, []);
 
   const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
+    const newValue = e.target.value;
+    userInputRef.current = newValue;
+    setUsername(newValue);
+
+    if (!userInputRef.current.match(/^[A-Za-z0-9]+$/)) {
+      if (userInputRef.current == "")
+        setUserError("Empty usernames will be randomized.");
+      else setUserError("Invalid name. It will be randomized.");
+    } else {
+      setUserError(null);
+    }
   };
 
   return (
@@ -36,14 +51,23 @@ const Start = ({ setView }) => {
             </p>
           </div>
           <div className={styles.usernameInput}>
-            <label htmlFor="username">Choose your username:</label>
+            <p
+              className={`${styles.error} ${!username && styles.empty}  ${
+                !userError ? styles.good : "xd"
+              } `}
+            >
+              {userError || "All Good!"}
+            </p>
             <input
               onChange={handleUsernameChange}
               id="username"
               type="text"
               placeholder="username"
               value={username}
+              pattern="^[0-9A-Za-z]+$"
+              required
             />
+            <label htmlFor="username">Choose your username:</label>
           </div>
           <div className={styles.characters}>
             {selectedCharacters.map((character) => (

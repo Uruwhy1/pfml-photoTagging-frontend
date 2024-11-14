@@ -46,7 +46,78 @@
 
 .usernameInput {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  flex-direction: column-reverse;
+  position: relative;
+
+  > label {
+    transition: all 0.2s;
+  }
+
+  > input {
+    background-color: var(--menu-button-color);
+    border: none;
+    border-radius: 3px;
+
+    padding: 0.5rem;
+    transition: outline 0.2s;
+
+    &:focus {
+      border: none;
+      outline: 2px solid var(--focus-color);
+
+      + label {
+        color: var(--focus-color);
+      }
+    }
+
+    &:valid {
+      --focus-color: rgb(36, 188, 36);
+      + label {
+        color: lightgreen;
+      }
+    }
+
+    &:invalid {
+      --focus-color: rgb(226, 49, 49);
+      + label {
+        color: lightcoral;
+      }
+    }
+
+    &:placeholder-shown {
+      --focus-color: #29ace0;
+      + label {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.usernameInput::after {
+  content: "[A to Z, 0 to 9]";
+  position: absolute;
+  right: 0px;
+  top: 0px;
+
+  font-size: 0.9em;
+  color: #c8c8c8;
+}
+
+.error {
+  font-size: 0.9em;
+  color: lightcoral;
+
+  margin-top: 0.1rem;
+
+  z-index: 1;
+
+  &.empty {
+    color: #c8c8c8;
+  }
+  &.good {
+    color: lightgreen !important;
+  }
 }
 
 .characters {
