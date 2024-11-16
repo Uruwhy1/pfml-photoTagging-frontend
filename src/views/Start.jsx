@@ -5,18 +5,14 @@ import styles from "./Start.module.css";
 import Character from "../components/Character";
 
 const Start = ({ setView }) => {
+  const [username, setUsername] = useState("");
   const [userError, setUserError] = useState(
     "Empty usernames will be randomized."
   );
   const userInputRef = useRef("");
 
-  const {
-    username,
-    setUsername,
-    startGame,
-    chooseCharacters,
-    selectedCharacters,
-  } = useContext(GameContext);
+  const { startGame, chooseCharacters, selectedCharacters } =
+    useContext(GameContext);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(chooseCharacters, []);
@@ -27,7 +23,7 @@ const Start = ({ setView }) => {
     setUsername(newValue);
 
     if (!userInputRef.current.match(/^[A-Za-z0-9]+$/)) {
-      if (userInputRef.current == "")
+      if (userInputRef.current === "")
         setUserError("Empty usernames will be randomized.");
       else setUserError("Invalid name. It will be randomized.");
     } else {
@@ -52,7 +48,7 @@ const Start = ({ setView }) => {
           </div>
           <div className={styles.usernameInput}>
             <p
-              className={`${styles.error} ${!username && styles.empty}  ${
+              className={`${styles.error} ${!username && styles.empty} ${
                 !userError ? styles.good : "xd"
               } `}
             >
@@ -77,7 +73,7 @@ const Start = ({ setView }) => {
           <button
             className={styles.start}
             onClick={() => {
-              startGame();
+              startGame(username); // Pass the username here
               setView("playing");
             }}
           >
