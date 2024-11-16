@@ -1,6 +1,8 @@
 .container {
   background-color: var(--header-bg);
 
+  width: fit-content;
+
   display: flex;
   justify-content: center;
 }
@@ -8,7 +10,8 @@
 .image {
   margin-top: var(--header-height);
 
-  max-width: 3000px;
+  min-width: 1500px;
   width: 100%;
+  height: auto;
   overflow: scroll;
 }
