@@ -69,8 +69,9 @@ const Start = ({ setView }) => {
           <button
             className={styles.start}
             onClick={() => {
-              startGame(username); // Pass the username here
-              setView("playing");
+              if (startGame(username)) {
+                setView("playing");
+              }
             }}
           >
             START GAME

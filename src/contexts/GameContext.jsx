@@ -63,11 +63,46 @@ export const GameProvider = ({ children }) => {
 
   // start game
   const [isGameStarted, setIsGameStarted] = useState(false);
-  const startGame = (username) => {
-    setIsGameStarted(true);
-    setGameTimer(0);
-    alert(`Game started with username: ${username}`);
+  const startGame = async (username) => {
+    try {
+      const response = await fetch(`${backendUrl}/${gameId}/start`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: username || getRandomUser(),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to start the game");
+      }
+
+      localStorage.removeItem("gameId");
+      localStorage.removeItem("characters");
+
+      setGameTimer(0);
+      setIsGameStarted(true);
+      return true;
+    } catch (error) {
+      console.error("Error starting the game:", error);
+    }
   };
+
+  function getRandomUser() {
+    const randomNames = [
+      "PlayerOne",
+      "RandomizedName",
+      "404NameNotFound",
+      "NameSurname",
+      "MagicCat",
+      "SleepingDragon",
+      "BigWhale",
+      "YellowFish",
+    ];
+    return randomNames[Math.floor(Math.random() * randomNames.length)];
+  }
 
   // timer
   const [gameTimer, setGameTimer] = useState(0);
