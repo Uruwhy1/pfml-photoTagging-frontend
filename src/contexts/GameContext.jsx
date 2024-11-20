@@ -23,11 +23,25 @@ export const GameProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchGameSetup = async () => {
+      let data;
+
+      if (localStorage.characters && localStorage.gameId) {
+        data = {
+          characterIds: JSON.parse(localStorage.characters),
+          gameId: localStorage.gameId,
+        };
+      }
+
       try {
-        const response = await fetch(`${backendUrl}/setup`, {
-          method: "POST",
-        });
-        const data = await response.json();
+        if (!data) {
+          const response = await fetch(`${backendUrl}/setup`, {
+            method: "POST",
+          });
+          data = await response.json();
+
+          localStorage.characters = JSON.stringify(data.characterIds);
+          localStorage.gameId = data.gameId;
+        }
 
         setGameId(data.gameId);
 
