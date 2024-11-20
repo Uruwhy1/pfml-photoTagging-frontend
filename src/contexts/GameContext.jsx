@@ -113,6 +113,13 @@ export const GameProvider = ({ children }) => {
     }
   }, [isGameStarted]);
 
+  const checkCharacter = (normalizedCoords, character) => {
+    console.log(character, normalizedCoords);
+    alert(
+      `Selected character: ${character.name}, at coords: ${normalizedCoords}`
+    );
+  };
+
   return (
     <GameContext.Provider
       value={{
@@ -123,6 +130,7 @@ export const GameProvider = ({ children }) => {
         startGame,
         gameTimer,
         gameId,
+        checkCharacter,
       }}
     >
       {children}

@@ -6,7 +6,8 @@ import styles from "./Playing.module.css";
 import ContextMenu from "../components/ContextMenu";
 
 const Playing = ({ setView }) => {
-  const { selectedCharacters, gameTimer } = useContext(GameContext);
+  const { selectedCharacters, gameTimer, checkCharacter } =
+    useContext(GameContext);
 
   const [menuVisible, setMenuVisible] = useState(false);
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
@@ -32,7 +33,7 @@ const Playing = ({ setView }) => {
       const adjustedY =
         e.clientY > viewportHeight / 2
           ? CORD_Y - menuHeight / 2
-          : CORD_Y + menuHeight / 2 + 10; // not sure why I need to add offset here
+          : CORD_Y + menuHeight / 2 + 10;
 
       setMenuVisible(true);
       setMenuPosition({ x: adjustedX, y: adjustedY });
@@ -45,16 +46,8 @@ const Playing = ({ setView }) => {
     const newX = x / image.width;
     const newY = y / image.height;
 
-    console.log(newX, newY);
     setNormalizedCoords({ x: newX, y: newY });
   }
-
-  const handleCharacterSelect = (character) => {
-    alert(
-      `Selected character: ${character.name}, at coords: ${normalizedCoords}`
-    );
-    setMenuVisible(false);
-  };
 
   return (
     <>
@@ -70,7 +63,10 @@ const Playing = ({ setView }) => {
           <ContextMenu
             items={selectedCharacters}
             position={menuPosition}
-            onSelect={handleCharacterSelect}
+            onSelect={(selectedCharacter) => {
+              setMenuVisible(false);
+              checkCharacter(normalizedCoords, selectedCharacter);
+            }}
           />
         )}
       </main>

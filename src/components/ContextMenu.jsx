@@ -13,7 +13,11 @@ const ContextMenu = ({ items, position, onSelect }) => {
     >
       <ul>
         {items.map((item) => (
-          <Character key={item.id} handleClick={onSelect} character={item} />
+          <Character
+            key={item.id}
+            handleClick={(item) => onSelect(item)}
+            character={item}
+          />
         ))}
       </ul>
     </div>
