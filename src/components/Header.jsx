@@ -17,7 +17,7 @@ const Header = ({ selectedCharacters, gameTimer }) => {
 
 Header.propTypes = {
   selectedCharacters: PropTypes.array.isRequired,
-  gameTimer: PropTypes.string.isRequired,
+  gameTimer: PropTypes.number.isRequired,
 };
 
 export default Header;

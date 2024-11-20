@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import GameContext from "../contexts/GameContext";
 import PropTypes from "prop-types";
 import styles from "./Start.module.css";
@@ -11,11 +11,7 @@ const Start = ({ setView }) => {
   );
   const userInputRef = useRef("");
 
-  const { startGame, chooseCharacters, selectedCharacters } =
-    useContext(GameContext);
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(chooseCharacters, []);
+  const { startGame, selectedCharacters } = useContext(GameContext);
 
   const handleUsernameChange = (e) => {
     const newValue = e.target.value;

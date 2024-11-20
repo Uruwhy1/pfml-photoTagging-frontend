@@ -8,8 +8,16 @@ import Playing from "./views/Playing";
 import Leaderboard from "./views/Leaderboard";
 import { useState } from "react";
 
+import { useContext } from "react";
+import GameContext from "./contexts/GameContext";
+
 function App() {
+  const { gameId } = useContext(GameContext);
   const [view, setView] = useState("start");
+
+  if (!gameId) {
+    return <div>Loading...</div>; // Display loading while game setup is being fetched
+  }
 
   return (
     <>
