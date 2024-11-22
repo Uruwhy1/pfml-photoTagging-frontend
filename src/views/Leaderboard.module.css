@@ -1,0 +1,133 @@
+.mainContainer {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--background-cover);
+  backdrop-filter: blur(5px);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+
+  width: 550px;
+
+  background-color: var(--menu-bg);
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+
+  color: var(--menu-color);
+}
+
+.scoreContainer {
+  width: 100%;
+  max-width: 600px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.scoreTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.scoreTable th,
+.scoreTable td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.scoreTable th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+  color: #333;
+}
+
+.scoreTable tr:last-child td {
+  border-bottom: none;
+}
+
+.topThree {
+  background-color: rgba(255, 215, 0, 0.1);
+}
+
+.topThree td:first-child {
+  font-weight: bold;
+}
+
+.menuButton {
+  --menu-button-shadow: var(--menu-button-color);
+  --box-shadow-size: 5px;
+
+  background-color: var(--menu-button-bg);
+  color: var(--menu-button-color);
+
+  font-weight: 500;
+
+  /* offset for box shadow */
+  margin-bottom: var(--box-shadow-size);
+  margin-right: var(--box-shadow-size);
+  /* --------------------- */
+
+  border: none;
+  padding: 0.75rem 1rem;
+  box-shadow: 5px 5px 0 var(--menu-button-shadow);
+
+  cursor: pointer;
+  transition: all 0.25s;
+  &:hover {
+    --menu-button-shadow: var(--menu-button-bg);
+
+    background-color: var(--menu-button-color);
+    color: #000;
+  }
+}
+
+.loading {
+  font-size: 1.2rem;
+  color: #666;
+  margin: 2rem 0;
+}
+
+.error {
+  color: #dc3545;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .scoreTable th,
+  .scoreTable td {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .menuButton {
+    width: 100%;
+    max-width: 300px;
+  }
+}
