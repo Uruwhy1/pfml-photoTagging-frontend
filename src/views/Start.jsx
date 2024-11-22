@@ -3,6 +3,7 @@ import GameContext from "../contexts/GameContext";
 import PropTypes from "prop-types";
 import styles from "./Start.module.css";
 import Character from "../components/Character";
+import MenuButton from "../components/MenuButton";
 
 const Start = ({ setView }) => {
   const [username, setUsername] = useState("");
@@ -66,8 +67,7 @@ const Start = ({ setView }) => {
               <Character key={character.id} character={character} />
             ))}
           </div>
-          <button
-            className={styles.start}
+          <MenuButton
             onClick={() => {
               if (startGame(username)) {
                 setView("playing");
@@ -75,7 +75,7 @@ const Start = ({ setView }) => {
             }}
           >
             START GAME
-          </button>
+          </MenuButton>
         </div>
       </div>
     </div>

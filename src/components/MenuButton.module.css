@@ -1,0 +1,28 @@
+.menuButton {
+  --menu-button-shadow: var(--menu-button-color);
+  --box-shadow-size: 5px;
+
+  background-color: var(--menu-button-bg);
+  color: var(--menu-button-color);
+
+  width: 100%;
+  font-weight: 500;
+
+  margin-bottom: var(--box-shadow-size);
+  margin-right: var(--box-shadow-size);
+
+  border: none;
+  padding: 0.75rem 0;
+  box-shadow: var(--box-shadow-size) var(--box-shadow-size) 0
+    var(--menu-button-shadow);
+
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.menuButton:hover {
+  --menu-button-shadow: var(--menu-button-bg);
+
+  background-color: var(--menu-button-color);
+  color: #000;
+}
