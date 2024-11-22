@@ -113,11 +113,38 @@ export const GameProvider = ({ children }) => {
     }
   }, [isGameStarted]);
 
-  const checkCharacter = (normalizedCoords, character) => {
-    console.log(character, normalizedCoords);
-    alert(
-      `Selected character: ${character.name}, at coords: ${normalizedCoords}`
-    );
+  const checkCharacter = async (normalizedCoords, character) => {
+    try {
+      const response = await fetch(`${backendUrl}/${gameId}/check`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          coordinates: normalizedCoords,
+          characterId: character.id,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to check character");
+      }
+
+      character.found = true;
+      return {
+        success: true,
+        character,
+        isGameComplete: data.message === "Game complete!",
+      };
+    } catch (error) {
+      console.error("Error checking character:", error);
+      return {
+        success: false,
+        error: error.message,
+      };
+    }
   };
 
   return (

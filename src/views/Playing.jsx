@@ -49,6 +49,14 @@ const Playing = ({ setView }) => {
     setNormalizedCoords({ x: newX, y: newY });
   }
 
+  const handleCharacterSelect = async (selectedCharacter) => {
+    setMenuVisible(false);
+    const result = await checkCharacter(normalizedCoords, selectedCharacter);
+    if (result.isGameComplete) {
+      setView("board");
+    }
+  };
+
   return (
     <>
       <Header selectedCharacters={selectedCharacters} gameTimer={gameTimer} />
@@ -63,10 +71,7 @@ const Playing = ({ setView }) => {
           <ContextMenu
             items={selectedCharacters}
             position={menuPosition}
-            onSelect={(selectedCharacter) => {
-              setMenuVisible(false);
-              checkCharacter(normalizedCoords, selectedCharacter);
-            }}
+            onSelect={handleCharacterSelect}
           />
         )}
       </main>
