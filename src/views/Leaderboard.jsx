@@ -1,19 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import styles from "./Leaderboard.module.css";
 import MenuButton from "../components/MenuButton";
+import GameContext from "../contexts/GameContext";
 
 const Leaderboard = ({ setView }) => {
   const [scores, setScores] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const { fetchGameSetup } = useContext(GameContext);
+  useEffect(() => {
+    fetchGameSetup();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const fetchScores = async () => {
       try {
         const response = await fetch(`${backendUrl}/highscores`);
-
         if (!response.ok) {
           const data = await response.json();
           if (response.status === 404) {
@@ -31,7 +37,6 @@ const Leaderboard = ({ setView }) => {
         setLoading(false);
       }
     };
-
     fetchScores();
   }, []);
 
@@ -41,11 +46,82 @@ const Leaderboard = ({ setView }) => {
     return `${minutes}m ${remainingSeconds}s`;
   };
 
+  const renderPodium = () => {
+    const topThree = scores.slice(0, 3);
+    const remainingScores = scores.slice(3);
+
+    return (
+      <>
+        <div className={styles.podium}>
+          {topThree.length > 0 && (
+            <div className={`${styles.podiumPlace} ${styles.first}`}>
+              <div className={styles.podiumPlayer}>
+                <div className={styles.playerName}>{topThree[0]?.username}</div>
+                <div className={styles.playerTime}>
+                  {formatTime(topThree[0]?.duration)}
+                </div>
+              </div>
+              <div className={styles.podiumPillar}>
+                <div className={styles.rank}>1</div>
+              </div>
+            </div>
+          )}
+
+          {topThree.length > 1 && (
+            <div className={`${styles.podiumPlace} ${styles.second}`}>
+              <div className={styles.podiumPlayer}>
+                <div className={styles.playerName}>{topThree[1]?.username}</div>
+                <div className={styles.playerTime}>
+                  {formatTime(topThree[1]?.duration)}
+                </div>
+              </div>
+              <div className={styles.podiumPillar}>
+                <div className={styles.rank}>2</div>
+              </div>
+            </div>
+          )}
+
+          {topThree.length > 2 && (
+            <div className={`${styles.podiumPlace} ${styles.third}`}>
+              <div className={styles.podiumPlayer}>
+                <div className={styles.playerName}>{topThree[2]?.username}</div>
+                <div className={styles.playerTime}>
+                  {formatTime(topThree[2]?.duration)}
+                </div>
+              </div>
+              <div className={styles.podiumPillar}>
+                <div className={styles.rank}>3</div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {remainingScores.length > 0 && (
+          <div className={styles.remainingScores}>
+            {remainingScores.map((score, index) => (
+              <div
+                key={`${score.username}-${index + 3}`}
+                className={styles.scoreCard}
+              >
+                <div className={styles.scoreRank}>#{index + 4}</div>
+                <div className={styles.scoreInfo}>
+                  <div className={styles.scoreUsername}>{score.username}</div>
+                  <div className={styles.scoreTime}>
+                    {formatTime(score.duration)}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </>
+    );
+  };
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.container}>
-        <h1 className={styles.title}>Top Times</h1>
-
+        <h1 className={styles.title}>Leaderboard</h1>
         {loading ? (
           <div className={styles.loading}>Loading scores...</div>
         ) : error ? (
@@ -57,33 +133,8 @@ const Leaderboard = ({ setView }) => {
             <p>No scores yet - be the first to play!</p>
           </div>
         ) : (
-          <div className={styles.scoreContainer}>
-            <table className={styles.scoreTable}>
-              <thead>
-                <tr>
-                  <th>Rank</th>
-                  <th>Player</th>
-                  <th>Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                {scores.map((score, index) => (
-                  <tr
-                    key={`${score.username}-${index}`}
-                    className={index < 3 ? styles.topThree : ""}
-                  >
-                    <td className={styles.rank}>#{index + 1}</td>
-                    <td className={styles.username}>{score.username}</td>
-                    <td className={styles.time}>
-                      {formatTime(score.duration)}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <div className={styles.scoreContainer}>{renderPodium()}</div>
         )}
-
         <MenuButton
           onClick={() => {
             setView("start");
