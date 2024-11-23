@@ -21,42 +21,42 @@ export const GameProvider = ({ children }) => {
   const [selectedCharacters, setSelectedCharacters] = useState([]);
   const [gameId, setGameId] = useState(null);
 
+  const fetchGameSetup = async () => {
+    let data;
+
+    if (localStorage.characters && localStorage.gameId) {
+      data = {
+        characterIds: JSON.parse(localStorage.characters),
+        gameId: localStorage.gameId,
+      };
+    }
+
+    try {
+      if (!data) {
+        const response = await fetch(`${backendUrl}/setup`, {
+          method: "POST",
+        });
+        data = await response.json();
+
+        localStorage.characters = JSON.stringify(data.characterIds);
+        localStorage.gameId = data.gameId;
+      }
+
+      setGameId(data.gameId);
+
+      const matchedCharacters = characters
+        .filter((character) => data.characterIds.includes(character.id))
+        .map((character) => ({
+          ...character,
+          found: false,
+        }));
+      setSelectedCharacters(matchedCharacters);
+    } catch (error) {
+      console.error("Error fetching game setup:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchGameSetup = async () => {
-      let data;
-
-      if (localStorage.characters && localStorage.gameId) {
-        data = {
-          characterIds: JSON.parse(localStorage.characters),
-          gameId: localStorage.gameId,
-        };
-      }
-
-      try {
-        if (!data) {
-          const response = await fetch(`${backendUrl}/setup`, {
-            method: "POST",
-          });
-          data = await response.json();
-
-          localStorage.characters = JSON.stringify(data.characterIds);
-          localStorage.gameId = data.gameId;
-        }
-
-        setGameId(data.gameId);
-
-        const matchedCharacters = characters
-          .filter((character) => data.characterIds.includes(character.id))
-          .map((character) => ({
-            ...character,
-            found: false,
-          }));
-        setSelectedCharacters(matchedCharacters);
-      } catch (error) {
-        console.error("Error fetching game setup:", error);
-      }
-    };
-
     fetchGameSetup();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -158,6 +158,7 @@ export const GameProvider = ({ children }) => {
         gameTimer,
         gameId,
         checkCharacter,
+        fetchGameSetup,
       }}
     >
       {children}

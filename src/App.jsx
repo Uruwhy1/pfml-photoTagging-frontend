@@ -13,7 +13,7 @@ import GameContext from "./contexts/GameContext";
 
 function App() {
   const { gameId } = useContext(GameContext);
-  const [view, setView] = useState("board");
+  const [view, setView] = useState("start");
 
   if (!gameId) {
     return <div>Loading...</div>; // Display loading while game setup is being fetched

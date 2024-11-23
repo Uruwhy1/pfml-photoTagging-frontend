@@ -10,17 +10,18 @@ const Playing = ({ setView }) => {
     useContext(GameContext);
 
   const [menuVisible, setMenuVisible] = useState(false);
+  const [requestLoading, setRequestLoading] = useState(false);
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
   const [normalizedCoords, setNormalizedCoords] = useState({ x: 0, y: 0 });
 
   const handleImageClick = (e) => {
+    if (requestLoading) return;
+
     const image = e.target.getBoundingClientRect();
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
-
     const menuWidth = 300;
     const menuHeight = 258;
-
     const CORD_X = e.clientX - image.x;
     const CORD_Y = e.clientY - image.y;
 
@@ -37,7 +38,6 @@ const Playing = ({ setView }) => {
 
       setMenuVisible(true);
       setMenuPosition({ x: adjustedX, y: adjustedY });
-
       normalizeCoords(image, CORD_X, CORD_Y);
     }
   };
@@ -45,15 +45,22 @@ const Playing = ({ setView }) => {
   function normalizeCoords(image, x, y) {
     const newX = x / image.width;
     const newY = y / image.height;
-
     setNormalizedCoords({ x: newX, y: newY });
   }
 
   const handleCharacterSelect = async (selectedCharacter) => {
-    setMenuVisible(false);
-    const result = await checkCharacter(normalizedCoords, selectedCharacter);
-    if (result.isGameComplete) {
-      setView("board");
+    if (requestLoading) return;
+    try {
+      setRequestLoading(true);
+      const result = await checkCharacter(normalizedCoords, selectedCharacter);
+      if (result.isGameComplete) {
+        setView("board");
+      }
+    } catch (error) {
+      console.error("Error checking character:", error);
+    } finally {
+      setRequestLoading(false);
+      setMenuVisible(false);
     }
   };
 

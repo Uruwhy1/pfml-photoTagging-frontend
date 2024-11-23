@@ -52,6 +52,8 @@
 
   background-color: #00000096 !important;
   backdrop-filter: blur(2px);
+
+  animation: animateFound 0.15s 1 linear;
 }
 
 @keyframes animateFound {
