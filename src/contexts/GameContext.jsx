@@ -55,7 +55,7 @@ export const GameProvider = ({ children }) => {
         }));
       setSelectedCharacters(matchedCharacters);
     } catch (error) {
-      showPopup("The was an error setting up the game", false);
+      showPopup("Error setting up the game.", false);
       console.error("Error fetching game setup:", error);
     }
   };
@@ -90,7 +90,7 @@ export const GameProvider = ({ children }) => {
       setIsGameStarted(true);
       return true;
     } catch (error) {
-      showPopup("There was an error starting the game.", false);
+      showPopup("Error starting the game.", false);
       console.error("Error starting the game:", error);
     }
   };

@@ -29,7 +29,7 @@ export const PopupProvider = ({ children }) => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       setPopupQueue((prevQueue) => prevQueue.slice(1));
-      setPopupActive();
+      setPopupActive(false);
     };
 
     processQueue();
