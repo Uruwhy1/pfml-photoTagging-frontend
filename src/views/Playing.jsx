@@ -8,7 +8,6 @@ import ContextMenu from "../components/ContextMenu";
 const Playing = ({ setView }) => {
   const { selectedCharacters, gameTimer, checkCharacter } =
     useContext(GameContext);
-
   const [menuVisible, setMenuVisible] = useState(false);
   const [requestLoading, setRequestLoading] = useState(false);
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
@@ -22,19 +21,27 @@ const Playing = ({ setView }) => {
     const viewportHeight = window.innerHeight;
     const menuWidth = 300;
     const menuHeight = 258;
+    const PADDING = 10;
+
     const CORD_X = e.clientX - image.x;
     const CORD_Y = e.clientY - image.y;
 
     if (menuVisible) {
       setMenuVisible(false);
     } else {
-      const adjustedX =
+      let adjustedX =
         e.clientX > viewportWidth / 2 ? CORD_X - menuWidth - 5 : CORD_X + 5;
 
-      const adjustedY =
+      let adjustedY =
         e.clientY > viewportHeight / 2
           ? CORD_Y - menuHeight / 2
           : CORD_Y + menuHeight / 2 + 10;
+
+      if (adjustedX < PADDING) {
+        adjustedX = PADDING;
+      } else if (adjustedX + menuWidth > viewportWidth - PADDING) {
+        adjustedX = PADDING;
+      }
 
       setMenuVisible(true);
       setMenuPosition({ x: adjustedX, y: adjustedY });
