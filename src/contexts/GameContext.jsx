@@ -1,10 +1,13 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
+import PopupContext from "./PopupContext";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 const GameContext = createContext();
 
 export const GameProvider = ({ children }) => {
+  const { showPopup } = useContext(PopupContext);
+
   // prettier-ignore
   const [characters] = useState([
     { id: 1, name: "Sleeping Dragon", img: "/sleepingDragon.png", size: "medium" },
@@ -52,6 +55,7 @@ export const GameProvider = ({ children }) => {
         }));
       setSelectedCharacters(matchedCharacters);
     } catch (error) {
+      showPopup("The was an error setting up the game", false);
       console.error("Error fetching game setup:", error);
     }
   };
@@ -86,6 +90,7 @@ export const GameProvider = ({ children }) => {
       setIsGameStarted(true);
       return true;
     } catch (error) {
+      showPopup("There was an error starting the game.", false);
       console.error("Error starting the game:", error);
     }
   };
@@ -132,6 +137,7 @@ export const GameProvider = ({ children }) => {
         throw new Error(data.error || "Failed to check character");
       }
 
+      showPopup(data.message, true);
       character.found = true;
       return {
         success: true,
@@ -139,6 +145,12 @@ export const GameProvider = ({ children }) => {
         isGameComplete: data.message === "Game complete!",
       };
     } catch (error) {
+      if (error.message.includes("Character")) {
+        showPopup("Character not found.", false);
+      } else {
+        showPopup("There was an error.", false);
+      }
+
       console.error("Error checking character:", error);
       return {
         success: false,

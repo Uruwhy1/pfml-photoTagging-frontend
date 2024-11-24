@@ -3,13 +3,15 @@ import PropTypes from "prop-types";
 import styles from "./Leaderboard.module.css";
 import MenuButton from "../components/MenuButton";
 import GameContext from "../contexts/GameContext";
+import PopupContext from "../contexts/PopupContext";
 
 const Leaderboard = ({ setView }) => {
   const [scores, setScores] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   const { fetchGameSetup } = useContext(GameContext);
+  const { showPopup } = useContext(PopupContext);
+
   useEffect(() => {
     fetchGameSetup();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -32,7 +34,7 @@ const Leaderboard = ({ setView }) => {
           setScores(data.highscores);
         }
       } catch (err) {
-        setError(err.message);
+        showPopup(err.message, false);
       } finally {
         setLoading(false);
       }
@@ -124,10 +126,6 @@ const Leaderboard = ({ setView }) => {
         <h1 className={styles.title}>Leaderboard</h1>
         {loading ? (
           <div className={styles.loading}>Loading scores...</div>
-        ) : error ? (
-          <div className={styles.error}>
-            <p>{error}</p>
-          </div>
         ) : scores.length === 0 ? (
           <div className={styles.empty}>
             <p>No scores yet - be the first to play!</p>

@@ -1,0 +1,52 @@
+.popup {
+  position: fixed;
+  top: -6rem;
+  left: 50%;
+  transform: translateX(-50%);
+
+  z-index: 999;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px 20px;
+  border-radius: 8px;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+
+  &.active {
+    animation: 2s linear popup;
+  }
+
+  &.success {
+    background-color: var(--success);
+
+    color: var(--success-text);
+  }
+  &.failure {
+    background-color: var(--error);
+
+    color: var(--error-text);
+  }
+}
+.popup svg {
+  height: 30px;
+  width: 30px;
+}
+
+@keyframes popup {
+  0% {
+    top: -4rem;
+  }
+  10% {
+    top: 1rem;
+  }
+  90% {
+    top: 1rem;
+  }
+  100% {
+    top: -4rem;
+  }
+}

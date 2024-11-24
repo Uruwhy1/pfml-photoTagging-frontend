@@ -10,4 +10,10 @@
 
   --menu-button-bg: #23829e;
   --menu-button-color: #ffffff;
+
+  --error: #ffecec;
+  --error-text: #f05252;
+
+  --success: #e2fff4;
+  --success-text: #0d9f6e;
 }
