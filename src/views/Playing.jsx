@@ -19,9 +19,8 @@ const Playing = ({ setView }) => {
     const image = e.target.getBoundingClientRect();
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
-    const menuWidth = 300;
+    let menuWidth = 300;
     const menuHeight = 258;
-    const PADDING = 10;
 
     const CORD_X = e.clientX - image.x;
     const CORD_Y = e.clientY - image.y;
@@ -37,10 +36,10 @@ const Playing = ({ setView }) => {
           ? CORD_Y - menuHeight / 2
           : CORD_Y + menuHeight / 2 + 10;
 
-      if (adjustedX < PADDING) {
-        adjustedX = PADDING;
-      } else if (adjustedX + menuWidth > viewportWidth - PADDING) {
-        adjustedX = PADDING;
+      if (e.clientX >= viewportWidth / 2) {
+        adjustedX = CORD_X - menuWidth;
+      } else if (e.clientX < viewportWidth) {
+        adjustedX = CORD_X;
       }
 
       setMenuVisible(true);
