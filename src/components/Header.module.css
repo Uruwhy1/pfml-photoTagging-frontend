@@ -18,7 +18,7 @@
   align-items: center;
   gap: 1rem;
 
-  --items-background: rgba(0, 0, 0, 0.772);
+  --items-background: rgba(0, 0, 0, 0.913);
 }
 
 .characters {
@@ -41,8 +41,6 @@
 .timer {
   font-weight: 1000;
   font-size: 2rem;
-
-  margin-right: 2rem;
 
   border-radius: 5px;
   padding: 1rem;
@@ -73,5 +71,19 @@
         display: none;
       }
     }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .container {
+    align-items: start;
+  }
+  .timer {
+    align-self: center;
+  }
+
+  .characters {
+    flex-direction: column;
+    max-height: fit-content;
   }
 }

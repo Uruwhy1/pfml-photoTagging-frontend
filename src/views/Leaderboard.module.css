@@ -175,3 +175,13 @@
     padding: 0;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .container {
+    padding: 1rem;
+  }
+  .podiumPlace {
+    gap: 1rem;
+    padding: 1rem;
+  }
+}
