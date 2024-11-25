@@ -8,12 +8,14 @@ import Playing from "./views/Playing";
 import Leaderboard from "./views/Leaderboard";
 import { useState } from "react";
 
-import { useContext } from "react";
-import GameContext from "./contexts/GameContext";
+import Loading from "./views/Loading";
 
 function App() {
-  const { gameId } = useContext(GameContext);
-  const [view, setView] = useState("start");
+  const [view, setView] = useState("loading");
+
+  setTimeout(() => {
+    setView("start");
+  }, 4000);
 
   return (
     <>
@@ -22,6 +24,7 @@ function App() {
       <SwitchTransition>
         <CSSTransition key={view} timeout={300} classNames="view" unmountOnExit>
           <>
+            {view == "loading" && <Loading />}
             {view === "board" && <Leaderboard setView={setView} />}
             {view === "start" && <Start setView={setView} />}
           </>

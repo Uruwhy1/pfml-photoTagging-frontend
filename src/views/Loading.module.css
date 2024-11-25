@@ -1,0 +1,98 @@
+.container {
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: #303030;
+  z-index: 100;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: #fff;
+  font-size: 3.5rem;
+  font-weight: 6 00;
+}
+
+.smallContainer {
+  width: 650px;
+
+  display: flex;
+  gap: 0.2rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.barContainer {
+  background-color: #404040;
+
+  height: 20px;
+  align-self: start;
+
+  width: 100%;
+}
+
+.progressBar {
+  animation: fill 4s linear forwards;
+  height: 100%;
+  background: #fff;
+  transform-origin: left;
+}
+
+.loadingText {
+  font-size: 1em;
+}
+
+@keyframes fill {
+  0% {
+    width: 0%;
+  }
+  25% {
+    width: 30%;
+  }
+  50% {
+    width: 50%;
+  }
+
+  75% {
+    width: 80%;
+  }
+  90% {
+    width: 85%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.fadeOut {
+  animation: fadeOut 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
