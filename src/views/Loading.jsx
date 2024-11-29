@@ -7,7 +7,7 @@ const loadingSteps = [
   { text: "Almost ready...", time: 2000 },
 ];
 
-const Loading = () => {
+const Loading = ({ setView }) => {
   const [currentText, setCurrentText] = useState(loadingSteps[0].text);
   const [fadeClass, setFadeClass] = useState(styles.fadeIn);
 
@@ -21,6 +21,13 @@ const Loading = () => {
         }, 500);
       }, time);
     });
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setView("start");
+    }, 4000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

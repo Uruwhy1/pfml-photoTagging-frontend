@@ -13,10 +13,6 @@ import Loading from "./views/Loading";
 function App() {
   const [view, setView] = useState("loading");
 
-  setTimeout(() => {
-    setView("start");
-  }, 4000);
-
   return (
     <>
       <Playing setView={setView} />
@@ -24,7 +20,7 @@ function App() {
       <SwitchTransition>
         <CSSTransition key={view} timeout={300} classNames="view" unmountOnExit>
           <>
-            {view == "loading" && <Loading />}
+            {view == "loading" && <Loading setView={setView} />}
             {view === "board" && <Leaderboard setView={setView} />}
             {view === "start" && <Start setView={setView} />}
           </>
