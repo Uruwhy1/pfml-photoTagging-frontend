@@ -28,7 +28,7 @@
   > div {
     background-color: var(--items-background);
 
-    min-width: 250px;
+    min-width: 300px;
 
     padding: 0.5rem;
     border-radius: 5px;
@@ -39,6 +39,8 @@
 }
 
 .timer {
+  min-width: 120px;
+  text-align: center;
   font-weight: 1000;
   font-size: 2rem;
 
@@ -50,7 +52,7 @@
   user-select: none;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1150px) {
   .characters {
     max-height: 140px;
 
