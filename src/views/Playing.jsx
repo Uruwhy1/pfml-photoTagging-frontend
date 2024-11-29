@@ -24,6 +24,7 @@ const Playing = ({ setView }) => {
 
     const CORD_X = e.clientX - image.x;
     const CORD_Y = e.clientY - image.y;
+    console.log(CORD_X, CORD_Y);
 
     if (menuVisible) {
       setMenuVisible(false);
@@ -32,9 +33,7 @@ const Playing = ({ setView }) => {
         e.clientX > viewportWidth / 2 ? CORD_X - menuWidth - 5 : CORD_X + 5;
 
       let adjustedY =
-        e.clientY > viewportHeight / 2
-          ? CORD_Y - menuHeight / 2
-          : CORD_Y + menuHeight / 2 + 10;
+        e.clientY > viewportHeight / 2 ? CORD_Y - menuHeight - 5 : CORD_Y + 5;
 
       if (e.clientX >= viewportWidth / 2) {
         adjustedX = CORD_X - menuWidth;

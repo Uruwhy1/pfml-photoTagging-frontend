@@ -10,14 +10,13 @@ export const GameProvider = ({ children }) => {
 
   // prettier-ignore
   const [characters] = useState([
-    { id: 1, name: "Sleeping Dragon", img: "/sleepingDragon.png", size: "medium" },
-    { id: 2, name: "Red Dragon", img: "/redDragon.png", size: "medium" },
-    { id: 3, name: "Yellow Fish", img: "/yellowFish.png", size: "very small" },
-    { id: 4, name: "Ship Guy", img: "/shipGuy.png", size: "very small" },
-    { id: 5, name: "Teacher", img: "/teacher.png", size: "very small" },
-    { id: 6, name: "Cats", img: "/cats.png", size: "very small" },
-    { id: 7, name: "Dragon and Human", img: "/dragonAndHuman.png", size: "small" },
-    { id: 8, name: "Stupid Face", img: "/stupidFace.png", size: "big" },
+    { id: 1, name: "Red Dragon", img: "/redDragon.png", size: "medium" },
+    { id: 2, name: "Yellow Fish", img: "/yellowFish.png", size: "very small" },
+    { id: 3, name: "Ship Guy", img: "/shipGuy.png", size: "very small" },
+    { id: 4, name: "Teacher", img: "/teacher.png", size: "very small" },
+    { id: 5, name: "Cats", img: "/cats.png", size: "very small" },
+    { id: 6, name: "Dragon and Human", img: "/dragonAndHuman.png", size: "small" },
+    { id: 7, name: "Stupid Face", img: "/stupidFace.png", size: "big" },
   ]);
 
   // game setup
