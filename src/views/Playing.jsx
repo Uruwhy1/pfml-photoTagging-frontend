@@ -72,7 +72,11 @@ const Playing = ({ setView }) => {
   return (
     <>
       <Header selectedCharacters={selectedCharacters} gameTimer={gameTimer} />
-      <main className={styles.container}>
+      <main
+        className={`${styles.container} ${
+          requestLoading ? styles.loading : ""
+        }`}
+      >
         <img
           onClick={(e) => handleImageClick(e)}
           className={styles.image}
@@ -81,6 +85,7 @@ const Playing = ({ setView }) => {
         />
         {menuVisible && (
           <ContextMenu
+            requestLoading={requestLoading}
             items={selectedCharacters}
             position={menuPosition}
             onSelect={handleCharacterSelect}

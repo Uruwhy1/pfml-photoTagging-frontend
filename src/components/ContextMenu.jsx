@@ -2,10 +2,12 @@ import PropTypes from "prop-types";
 import styles from "./ContextMenu.module.css";
 import Character from "./Character";
 
-const ContextMenu = ({ items, position, onSelect }) => {
+const ContextMenu = ({ requestLoading, items, position, onSelect }) => {
   return (
     <div
-      className={styles.contextMenu}
+      className={` ${styles.contextMenu} ${
+        requestLoading ? styles.loading : ""
+      }`}
       style={{
         top: `${position.y}px`,
         left: `${position.x}px`,
@@ -25,6 +27,7 @@ const ContextMenu = ({ items, position, onSelect }) => {
 };
 
 ContextMenu.propTypes = {
+  requestLoading: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired,
   position: PropTypes.shape({
     x: PropTypes.number.isRequired,
