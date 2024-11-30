@@ -1,8 +1,19 @@
-# React + Vite
+# Photo Tagging App
+![start menu](https://github.com/user-attachments/assets/2a66a83c-d27b-4072-94d5-d73ec7625aae)
+![APP Walktrough](https://youtu.be/757PD5D-sfI)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Features
+- **It uses a central GameContext.jsx file to store all functions related to the api, characters, etc.**
 
-Currently, two official plugins are available:
+- **Everything is checked backend-side: game creation, character checks, and the time to complete.**
+  - When the page loads, it sends an api request to create a game and stores it in localStorage. If the page refreshes while a game is already stored, it does not create another one.
+  - When the game starts, it removes the stored game from localStorage.
+  - When clicking on a character, it sends a request to the api and either marks the character as found or gives an error popup depending on the response.
+  - When the leaderboards component mounts, it sends another game-creation request.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies
+- **React** (using Vite).
+- **CSS Modules** for stylings.
+
+## Links
+- [Backend](https://github.com/Uruwhy1/odin-whereIsWaldo)
