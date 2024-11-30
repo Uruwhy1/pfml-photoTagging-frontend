@@ -1,6 +1,6 @@
 # Photo Tagging App
 ![start menu](https://github.com/user-attachments/assets/2a66a83c-d27b-4072-94d5-d73ec7625aae)
-![APP Walktrough](https://youtu.be/757PD5D-sfI)
+[APP Walktrough](https://youtu.be/757PD5D-sfI)
 
 ## Features
 - **It uses a central GameContext.jsx file to store all functions related to the api, characters, etc.**
