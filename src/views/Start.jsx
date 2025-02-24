@@ -1,18 +1,20 @@
 import { useContext, useRef, useState } from "react";
 import GameContext from "../contexts/GameContext";
+import PopupContext from "../contexts/PopupContext";
 import PropTypes from "prop-types";
 import styles from "./Start.module.css";
 import Character from "../components/Character";
 import MenuButton from "../components/MenuButton";
 
 const Start = ({ setView }) => {
+  const { showPopup } = useContext(PopupContext);
   const [username, setUsername] = useState("");
   const [userError, setUserError] = useState(
     "Empty usernames will be randomized."
   );
   const userInputRef = useRef("");
 
-  const { startGame, selectedCharacters } = useContext(GameContext);
+  const { startGame, selectedCharacters, gameId } = useContext(GameContext);
 
   const handleUsernameChange = (e) => {
     const newValue = e.target.value;
@@ -69,7 +71,11 @@ const Start = ({ setView }) => {
           </div>
           <MenuButton
             onClick={() => {
-              if (startGame(username)) {
+              if (!gameId) {
+                showPopup(
+                  "The server is currently sleeping. Try again after thirty to fifty seconds!"
+                );
+              } else if (startGame(username)) {
                 setView("playing");
               }
             }}
