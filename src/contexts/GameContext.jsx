@@ -26,22 +26,12 @@ export const GameProvider = ({ children }) => {
   const fetchGameSetup = async () => {
     let data;
 
-    if (localStorage.characters && localStorage.gameId) {
-      data = {
-        characterIds: JSON.parse(localStorage.characters),
-        gameId: localStorage.gameId,
-      };
-    }
-
     try {
       if (!data) {
         const response = await fetch(`${backendUrl}/setup`, {
           method: "POST",
         });
         data = await response.json();
-
-        localStorage.characters = JSON.stringify(data.characterIds);
-        localStorage.gameId = data.gameId;
       }
 
       setGameId(data.gameId);
@@ -81,9 +71,6 @@ export const GameProvider = ({ children }) => {
       if (!response.ok) {
         throw new Error("Failed to start the game");
       }
-
-      localStorage.removeItem("gameId");
-      localStorage.removeItem("characters");
 
       setGameTimer(0);
       setIsGameStarted(true);

@@ -73,7 +73,7 @@ const Start = ({ setView }) => {
             onClick={() => {
               if (!gameId) {
                 showPopup(
-                  "The server is currently sleeping. Try again after thirty to fifty seconds!"
+                  "The server is currently sleeping. Try again after you get a game assigned!"
                 );
               } else if (startGame(username)) {
                 setView("playing");
